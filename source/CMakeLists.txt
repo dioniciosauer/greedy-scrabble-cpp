@@ -2,7 +2,8 @@
 project(core)
 
 add_library(${PROJECT_NAME} STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/Stub.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/Stub.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/TrieNode.cpp)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_NAME ${PROJECT_NAME}
