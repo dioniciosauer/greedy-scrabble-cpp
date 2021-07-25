@@ -9,36 +9,37 @@
 
 namespace Scrabble
 {
-    class TrieNode : public std::enable_shared_from_this<TrieNode>
+    class TrieNode
     {
         public:
             TrieNode(const std::vector<std::string>& words);
 
-            bool ContainsPrefix(const std::string& word) const;
+            bool ContainsPrefix(const std::string& prefix) const;
 
             bool ContainsWord(const std::string& word) const;
 
             std::optional<std::shared_ptr<const TrieNode>> FindNodeWithPrefix(const std::string& prefix) const;
 
+            bool IsLeaf() const;
+
             const std::vector<char> ValidFirstLetters(const std::string& word) const;
 
             const std::vector<char> ValidLastLetters(const std::string& word) const;
 
-            bool leaf() const;
-
             bool terminal() const;
 
         private:
-            TrieNode(const std::vector<std::string>& words, const int level, const std::string& prefix);
+            TrieNode(const int level, const std::string& prefix, const bool terminal);
 
-            void CreateChildren();
+            bool AddWord(const std::string& word);
 
-            bool leaf_;
-            bool terminal_;
-            int  level;
-            std::vector<std::string> words;
-            std::string prefix;
-            std::vector<std::vector<std::shared_ptr<TrieNode>>> levels;
+            bool IsRoot() const;
+
+            void terminal(const bool terminal);
+
+            bool                terminal_;
+            const int           level;
+            const std::string   prefix_;
             std::map<char, std::shared_ptr<TrieNode>> children;
         
     };
